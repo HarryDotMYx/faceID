@@ -1,0 +1,153 @@
+# Facial Recognition System Flow Documentation
+
+## Directory Structure
+```
+recognition/
+├── __init__.py
+├── urls/                  # URL routing
+│   ├── __init__.py       # Main URL configuration
+│   ├── main.py           # Home page routes
+│   ├── face.py           # Face management routes
+│   ├── webcam.py         # Webcam handling routes
+│   ├── frame.py          # Frame processing routes
+│   └── upload.py         # Upload handling routes
+├── views/                # View handlers
+│   ├── __init__.py
+│   ├── home.py          # Home page views
+│   ├── face.py          # Face management views
+│   ├── webcam.py        # Webcam handling views
+│   └── frame_processing.py # Frame processing views
+├── utils/               # Utility modules
+│   ├── __init__.py
+│   ├── directory_setup.py
+│   ├── file_cleanup.py
+│   ├── face_processing.py
+│   └── video/          # Video processing utilities
+│       ├── frame_capture.py
+│       ├── frame_processor.py
+│       ├── fps_monitor.py
+│       └── overlay_renderer.py
+├── static/             # Static assets
+│   └── recognition/
+│       ├── js/
+│       │   ├── face-recognition.js
+│       │   └── services/
+│       │       ├── camera-service.js
+│       │       ├── frame-service.js
+│       │       └── overlay-renderer.js
+└── templates/         # HTML templates
+    └── recognition/
+        ├── home.html
+        ├── live.html
+        └── upload.html
+
+## Main Application Flow
+
+1. User Authentication
+   - User registers/logs in
+   - Profile created automatically via signals
+
+2. Face Image Management
+   - User uploads face images
+   - Images processed and validated
+   - Face encodings generated and stored
+
+3. Live Recognition Flow
+   a. Initialization
+      - Camera access requested
+      - Video stream started
+      - Canvas overlay prepared
+   
+   b. Frame Processing
+      - Frames captured from video stream
+      - Sent to server for processing
+      - Face detection performed
+      - Face matching against stored encodings
+   
+   c. Results Display
+      - Detection results rendered on overlay
+      - Recognition status shown
+      - FPS counter updated
+
+4. File Processing Flow
+   - Images stored in media directories
+   - Temporary files cleaned up
+   - User-specific directories maintained
+
+## Key Components
+
+1. Frame Processing Pipeline
+   - Frame capture
+   - RGB conversion
+   - Face detection
+   - Face encoding
+   - Face matching
+   - Result rendering
+
+2. Directory Management
+   - Media directories created per user
+   - Encodings stored securely
+   - Temporary files cleaned up
+
+3. Frontend Services
+   - Camera handling
+   - Frame processing
+   - Overlay rendering
+   - Error handling
+
+4. Security Measures
+   - CSRF protection
+   - User authentication
+   - File validation
+   - Secure file handling
+
+## API Endpoints
+
+1. Face Management
+   - /face/upload/         # Upload face images
+   - /face/verify/         # Verify face
+   - /face/delete/<id>/    # Delete face image
+
+2. Webcam Handling
+   - /webcam/capture/      # Capture from webcam
+   - /webcam/save/         # Save webcam image
+   - /webcam/live/         # Live recognition
+
+3. Frame Processing
+   - /process-frame/       # Process video frames
+
+4. Upload Handling
+   - /upload/process/      # Process uploaded files
+
+## Error Handling
+
+1. Client-side
+   - Camera access errors
+   - Frame processing errors
+   - Network errors
+   - File upload errors
+
+2. Server-side
+   - File validation errors
+   - Processing errors
+   - Database errors
+   - Permission errors
+
+## Performance Considerations
+
+1. Frame Processing
+   - Optimal frame rate management
+   - Efficient face detection
+   - Memory management
+   - Resource cleanup
+
+2. File Management
+   - Regular cleanup of temp files
+   - Efficient storage usage
+   - Image optimization
+
+3. Frontend Performance
+   - Efficient canvas rendering
+   - Stream management
+   - Resource cleanup
+```

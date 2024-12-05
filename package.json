@@ -1,0 +1,17 @@
+{
+  "name": "facial-recognition-django",
+  "private": true,
+  "scripts": {
+    "postinstall": "python3 -m pip install --user -r requirements.txt",
+    "prestart": "python3 manage.py makemigrations && python3 manage.py migrate",
+    "start": "python3 manage.py runserver_plus --cert-file cert.pem --key-file key.pem 0.0.0.0:3000",
+    "test": "python3 manage.py test",
+    "migrate": "python3 manage.py makemigrations && python3 manage.py migrate",
+    "build:css": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "dependencies": {
+    "django": "^4.2.7",
+    "django-crispy-forms": "^2.1",
+    "tailwindcss": "^3.3.5"
+  }
+}

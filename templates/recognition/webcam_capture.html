@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8">Capture Face Image</h1>
+    
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="text-center">
+            {% csrf_token %}
+            
+            <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"></div>
+            
+            <div class="mb-4 relative inline-block">
+                <video id="webcam" 
+                       autoplay 
+                       playsinline 
+                       muted
+                       class="hidden rounded-lg shadow-lg"
+                       style="width: 640px; height: 480px;"></video>
+                       
+                <img id="preview"
+                     class="hidden rounded-lg shadow-lg"
+                     style="width: 640px; height: 480px;">
+                     
+                <canvas id="canvas" class="hidden"></canvas>
+            </div>
+            
+            <div class="space-y-4">
+                <button id="captureBtn"
+                        class="hidden bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-200">
+                    Capture Photo
+                </button>
+                
+                <button id="retakeBtn"
+                        class="hidden bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-200">
+                    Retake Photo
+                </button>
+                
+                <button id="uploadBtn"
+                        class="hidden bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-200">
+                    Upload Photo
+                </button>
+            </div>
+            
+            <div class="mt-4">
+                <a href="{% url 'recognition:upload' %}" 
+                   class="text-blue-500 hover:underline">
+                    Back to Upload Page
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">Tips for a Good Photo:</h2>
+        <ul class="list-disc list-inside space-y-2 text-gray-600">
+            <li>Ensure good lighting on your face</li>
+            <li>Look directly at the camera</li>
+            <li>Keep a neutral expression</li>
+            <li>Avoid wearing sunglasses or hats</li>
+            <li>Make sure your face is clearly visible</li>
+        </ul>
+    </div>
+</div>
+
+<script src="{% static 'recognition/js/webcam-capture.js' %}"></script>
+{% endblock %}

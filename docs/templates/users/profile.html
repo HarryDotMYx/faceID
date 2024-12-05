@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="mb-8 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Profile</h1>
+        <div class="flex space-x-4">
+            <a href="{% url 'recognition:face:upload' %}" 
+               class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                Upload Face Image
+            </a>
+            <a href="{% url 'recognition:webcam:live' %}" 
+               class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+                Live Recognition
+            </a>
+            <a href="{% url 'recognition:reports:generate' %}"
+               class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition">
+                Download Report
+            </a>
+        </div>
+    </div>
+    
+    <!-- Rest of the profile template remains unchanged -->
+    
+</div>
+{% endblock %}

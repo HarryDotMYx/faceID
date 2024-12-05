@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom dark mode transitions */
+.transition-colors {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+}
+
+/* Theme button styles */
+[data-theme-value].active {
+    @apply bg-blue-100 dark:bg-blue-900;
+}
+
+/* Dark mode form styles */
+.dark .form-input,
+.dark .form-select,
+.dark .form-textarea {
+    @apply bg-gray-800 border-gray-700 text-white;
+}
+
+.dark .form-input:focus,
+.dark .form-select:focus,
+.dark .form-textarea:focus {
+    @apply border-blue-500 ring-blue-500;
+}

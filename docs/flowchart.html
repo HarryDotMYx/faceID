@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Recognition System Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+        }
+        
+        .mermaid {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+        }
+        
+        .section-card {
+            transition: transform 0.2s;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Facial Recognition System Flow</h1>
+            <p class="text-lg text-gray-600">A comprehensive visualization of system architecture and data flow</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 gap-8">
+            <!-- Authentication Flow -->
+            <section class="bg-white rounded-lg shadow-md p-6 section-card">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Authentication Flow</h2>
+                <div class="mermaid">
+                    graph TD
+                        A[User] -->|Login/Register| B[Authentication]
+                        B -->|Success| C[Dashboard]
+                        B -->|Failure| D[Login Page]
+                        C -->|Choose Action| E{Actions}
+                        E -->|Upload| F[Face Management]
+                        E -->|Live| G[Live Recognition]
+                        E -->|Verify| H[Face Verification]
+                        
+                        style A fill:#f3f4f6,stroke:#4f46e5
+                        style B fill:#e0e7ff,stroke:#4f46e5
+                        style C fill:#e0e7ff,stroke:#4f46e5
+                        style D fill:#fee2e2,stroke:#ef4444
+                        style E fill:#f3f4f6,stroke:#4f46e5
+                        style F fill:#dbeafe,stroke:#3b82f6
+                        style G fill:#dcfce7,stroke:#22c55e
+                        style H fill:#fae8ff,stroke:#d946ef
+                </div>
+            </section>
+
+            <!-- Face Processing Flow -->
+            <section class="bg-white rounded-lg shadow-md p-6 section-card">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Face Processing Flow</h2>
+                <div class="mermaid">
+                    graph TD
+                        A[Image Input] -->|Upload| B[Validation]
+                        B -->|Valid| C[Face Detection]
+                        C -->|Found| D[Feature Extraction]
+                        D --> E[Generate Encoding]
+                        E --> F[(Database)]
+                        C -->|Not Found| G[Error]
+                        
+                        style A fill:#dbeafe,stroke:#3b82f6
+                        style B fill:#e0e7ff,stroke:#4f46e5
+                        style C fill:#dcfce7,stroke:#22c55e
+                        style D fill:#fae8ff,stroke:#d946ef
+                        style E fill:#dbeafe,stroke:#3b82f6
+                        style F fill:#f3f4f6,stroke:#4f46e5
+                        style G fill:#fee2e2,stroke:#ef4444
+                </div>
+            </section>
+
+            <!-- Live Recognition Flow -->
+            <section class="bg-white rounded-lg shadow-md p-6 section-card">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Live Recognition Flow</h2>
+                <div class="mermaid">
+                    graph TD
+                        A[Start Camera] -->|Initialize| B[Video Stream]
+                        B -->|Capture| C[Frame Processing]
+                        C -->|Send| D[Server]
+                        D -->|Process| E[Face Detection]
+                        E -->|Match| F[Compare Encodings]
+                        F -->|Result| G[Display]
+                        G -->|Next Frame| C
+                        
+                        style A fill:#dbeafe,stroke:#3b82f6
+                        style B fill:#dcfce7,stroke:#22c55e
+                        style C fill:#e0e7ff,stroke:#4f46e5
+                        style D fill:#fae8ff,stroke:#d946ef
+                        style E fill:#dbeafe,stroke:#3b82f6
+                        style F fill:#dcfce7,stroke:#22c55e
+                        style G fill:#f3f4f6,stroke:#4f46e5
+                </div>
+            </section>
+
+            <!-- System Architecture -->
+            <section class="bg-white rounded-lg shadow-md p-6 section-card">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">System Architecture</h2>
+                <div class="mermaid">
+                    graph TD
+                        subgraph Frontend
+                            A[Web Interface]
+                            B[Camera Module]
+                            C[Canvas Overlay]
+                        end
+                        
+                        subgraph Backend
+                            D[Django Server]
+                            E[Face Processing]
+                            F[Model Training]
+                        end
+                        
+                        subgraph Storage
+                            G[(Database)]
+                            H[Media Files]
+                            I[Encodings]
+                        end
+                        
+                        A <-->|HTTP/WS| D
+                        B -->|Frames| D
+                        D <--> E
+                        E <--> F
+                        D <--> G
+                        E <--> H
+                        F <--> I
+                        
+                        style A fill:#dbeafe,stroke:#3b82f6
+                        style B fill:#dcfce7,stroke:#22c55e
+                        style C fill:#e0e7ff,stroke:#4f46e5
+                        style D fill:#fae8ff,stroke:#d946ef
+                        style E fill:#dbeafe,stroke:#3b82f6
+                        style F fill:#dcfce7,stroke:#22c55e
+                        style G fill:#f3f4f6,stroke:#4f46e5
+                        style H fill:#e0e7ff,stroke:#4f46e5
+                        style I fill:#fae8ff,stroke:#d946ef
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-600">
+            <p>Generated documentation for Facial Recognition System</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#4f46e5',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#4f46e5',
+                lineColor: '#4f46e5',
+                secondaryColor: '#3b82f6'
+            },
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            }
+        });
+    </script>
+</body>
+</html>
