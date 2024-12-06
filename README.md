@@ -31,8 +31,8 @@ A robust facial recognition system built with Django and modern JavaScript, feat
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/facial-recognition-system.git
-cd facial-recognition-system
+git clone https://github.com/HarryDotMYx/faceID.git
+cd faceID
 ```
 
 2. Create and activate virtual environment:
@@ -123,9 +123,6 @@ facial-recognition-system/
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
@@ -133,3 +130,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Django](https://www.djangoproject.com/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [OpenCV](https://opencv.org/)
+
+##
+Made with 💓💖💝💘💌 <3 
