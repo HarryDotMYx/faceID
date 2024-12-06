@@ -133,3 +133,7 @@ facial-recognition-system/
 
 ##
 Made with 💓💖💝💘💌 <3 
+
+
+## Docs?
+- Read at [docs](https://github.com/HarryDotMYx/faceID/tree/main/docs)
