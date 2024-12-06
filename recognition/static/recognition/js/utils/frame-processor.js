@@ -22,7 +22,7 @@ class FrameProcessor {
             
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             
-            const response = await fetch('/recognition/process_frame/', {
+            const response = await fetch('/process-frame/', {
                 method: 'POST',
                 body: formData,
                 headers: {

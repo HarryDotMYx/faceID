@@ -31,7 +31,7 @@ A robust facial recognition system built with Django and modern JavaScript, feat
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/harrydotmyx/faceid.git
+git clone https://github.com/yourusername/facial-recognition-system.git
 cd facial-recognition-system
 ```
 

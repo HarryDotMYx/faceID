@@ -1,17 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .utils.file_validation import validate_image_file
+from django.utils import timezone
 
 class FaceImage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(
-        upload_to='face_images',
-        validators=[validate_image_file]
-    )
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.user.username} - {self.uploaded_at}'
-
+    image = models.ImageField(upload_to='face_images')
+    uploaded_at = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=True)
+    recognition_score = models.FloatField(null=True, blank=True)
+    
     class Meta:
         ordering = ['-uploaded_at']
+        
+    def __str__(self):
+        return f'{self.user.username} - {self.uploaded_at}'
+        
+    def delete(self, *args, **kwargs):
+        # Delete the image file when the model instance is deleted
+        self.image.delete()
+        super().delete(*args, **kwargs)

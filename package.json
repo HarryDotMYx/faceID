@@ -12,6 +12,7 @@
   "dependencies": {
     "django": "^4.2.7",
     "django-crispy-forms": "^2.1",
+    "django-extensions": "^3.2.3",
     "tailwindcss": "^3.3.5"
   }
 }

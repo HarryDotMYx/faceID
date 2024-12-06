@@ -17,6 +17,10 @@ class Profile(models.Model):
     location = models.CharField(max_length=100, blank=True)
     website = models.URLField(max_length=200, blank=True)
     joined_date = models.DateTimeField(default=timezone.now)
+    is_banned = models.BooleanField(default=False)
+    ban_reason = models.TextField(blank=True)
+    last_login_attempt = models.DateTimeField(null=True, blank=True)
+    failed_login_attempts = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -28,3 +32,12 @@ class Profile(models.Model):
             'blue': 'bg-blue-50',
             'green': 'bg-green-50'
         }.get(self.theme, 'bg-white')
+
+    def increment_failed_login(self):
+        self.failed_login_attempts += 1
+        self.last_login_attempt = timezone.now()
+        self.save()
+
+    def reset_failed_login(self):
+        self.failed_login_attempts = 0
+        self.save()
