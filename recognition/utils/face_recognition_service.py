@@ -1,4 +1,4 @@
-```python
+  
 import cv2
 import face_recognition
 import numpy as np
@@ -110,4 +110,4 @@ class FaceRecognitionService:
         except Exception as e:
             logger.error(f"Error processing frame: {str(e)}")
             return []
-```
+  

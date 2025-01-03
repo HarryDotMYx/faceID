@@ -4,7 +4,7 @@
 
 These color configurations are defined in `tailwind.config.js`:
 
-```javascript
+  javascript
 colors: {
     transparent: 'transparent',
     current: 'currentColor',
@@ -94,13 +94,13 @@ colors: {
         900: '#bababa',
     },
 }
-```
+  
 
 ## CSS Custom Properties
 
 These variables are available globally through CSS custom properties:
 
-```css
+  css
 :root {
     /* Primary Colors */
     --color-primary: #3B82F6;
@@ -143,13 +143,13 @@ These variables are available globally through CSS custom properties:
     --color-background-alt: #1F2937;
     --color-background-dark: #374151;
 }
-```
+  
 
 ## Usage Examples
 
 ### JavaScript Theme Switching
 
-```javascript
+  javascript
 // In theme.js
 const setTheme = (theme) => {
     document.documentElement.dataset.theme = theme;
@@ -159,11 +159,11 @@ const setTheme = (theme) => {
 // Apply theme based on user preference
 const userTheme = localStorage.getItem('theme') || 'light';
 setTheme(userTheme);
-```
+  
 
 ### React Components
 
-```javascript
+  javascript
 // Example button component using Tailwind classes
 const Button = ({ variant = 'primary', children }) => {
     const variants = {
@@ -179,11 +179,11 @@ const Button = ({ variant = 'primary', children }) => {
         </button>
     );
 };
-```
+  
 
 ### Django Templates
 
-```html
+  html
 <!-- Example alert component -->
 {% if messages %}
     {% for message in messages %}
@@ -202,7 +202,7 @@ const Button = ({ variant = 'primary', children }) => {
         </div>
     {% endfor %}
 {% endif %}
-```
+  
 
 ## Best Practices
 

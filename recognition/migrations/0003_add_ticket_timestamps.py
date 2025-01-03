@@ -1,25 +1,12 @@
-from django.db import migrations, models
+  
+from django.db import migrations
 
 class Migration(migrations.Migration):
+    """Empty migration - fields already added in initial migration"""
 
     dependencies = [
         ('recognition', '0002_create_helpdesk'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='ticket',
-            name='closed_at',
-            field=models.DateTimeField(blank=True, null=True),
-        ),
-        migrations.AddField(
-            model_name='ticket',
-            name='status_changed_at',
-            field=models.DateTimeField(blank=True, null=True),
-        ),
-        migrations.AddField(
-            model_name='ticket',
-            name='previous_status',
-            field=models.CharField(blank=True, max_length=20),
-        ),
-    ]
+    operations = []
+  

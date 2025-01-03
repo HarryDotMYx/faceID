@@ -1,7 +1,7 @@
 # Facial Recognition System Flow Documentation
 
 ## Directory Structure
-```
+  
 recognition/
 ├── __init__.py
 ├── urls/                  # URL routing
@@ -150,4 +150,4 @@ recognition/
    - Efficient canvas rendering
    - Stream management
    - Resource cleanup
-```
+  

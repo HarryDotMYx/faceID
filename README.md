@@ -30,43 +30,43 @@ A robust facial recognition system built with Django and modern JavaScript, feat
 ## Installation
 
 1. Clone the repository:
-```bash
+  bash
 git clone https://github.com/HarryDotMYx/faceID.git
 cd faceID
-```
+  
 
 2. Create and activate virtual environment:
-```bash
+  bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 # or
 .\venv\Scripts\activate  # Windows
-```
+  
 
 3. Install dependencies:
-```bash
+  bash
 pip install -r requirements.txt
 npm install
-```
+  
 
 4. Setup database:
-```bash
+  bash
 python manage.py migrate
-```
+  
 
 5. Create superuser:
-```bash
+  bash
 python manage.py createsuperuser
-```
+  
 
 6. Run development server:
-```bash
+  bash
 python manage.py runserver
-```
+  
 
 ## Project Structure
 
-```
+  
 facial-recognition-system/
 ├── recognition/          # Main application
 │   ├── urls/            # URL routing
@@ -78,7 +78,7 @@ facial-recognition-system/
 ├── docs/                # Documentation
 ├── static/              # Global static files
 └── templates/           # Global templates
-```
+  
 
 ## Key Components
 

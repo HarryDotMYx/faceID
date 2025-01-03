@@ -1,3 +1,4 @@
+  
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -64,13 +65,4 @@ class Ticket(models.Model):
         if self.closed_at:
             return (self.closed_at - self.created_at).days
         return (timezone.now() - self.created_at).days
-        
-    @property
-    def month_created(self):
-        """Get month ticket was created"""
-        return self.created_at.strftime('%B')
-        
-    @property
-    def year_created(self):
-        """Get year ticket was created"""
-        return self.created_at.year
+  

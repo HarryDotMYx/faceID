@@ -1,7 +1,7 @@
 # Facial Recognition System Flow
 
 ## 1. User Authentication Flow
-```mermaid
+  mermaid
 graph TD
     A[User] -->|Login/Register| B[Authentication]
     B -->|Success| C[Dashboard]
@@ -10,10 +10,10 @@ graph TD
     E -->|Upload| F[Face Management]
     E -->|Live| G[Live Recognition]
     E -->|Verify| H[Face Verification]
-```
+  
 
 ## 2. Face Management Flow
-```mermaid
+  mermaid
 graph TD
     A[Upload Face] -->|Submit| B[Validation]
     B -->|Valid| C[Face Detection]
@@ -22,10 +22,10 @@ graph TD
     C -->|No Face| F[Error Message]
     E --> G[Save to Database]
     G --> H[Update Model]
-```
+  
 
 ## 3. Live Recognition Flow
-```mermaid
+  mermaid
 graph TD
     A[Start Camera] -->|Initialize| B[Video Stream]
     B -->|Capture| C[Frame Processing]
@@ -33,10 +33,10 @@ graph TD
     D -->|Match| E[Compare Encodings]
     E -->|Result| F[Render Overlay]
     F -->|Next Frame| C
-```
+  
 
 ## 4. Data Processing Flow
-```mermaid
+  mermaid
 graph TD
     A[Input Image] -->|Process| B[RGB Conversion]
     B --> C[Face Detection]
@@ -45,10 +45,10 @@ graph TD
     E -->|Store| F[(Database)]
     E -->|Compare| G[Face Matching]
     G -->|Result| H[Recognition Result]
-```
+  
 
 ## 5. System Architecture
-```mermaid
+  mermaid
 graph TD
     subgraph Frontend
         A[Web Interface]
@@ -75,7 +75,7 @@ graph TD
     D <--> G
     E <--> H
     F <--> I
-```
+  
 
 ## Key Components
 
