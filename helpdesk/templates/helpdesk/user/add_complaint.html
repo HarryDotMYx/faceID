@@ -1,0 +1,22 @@
+  html
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8">Submit a Complaint</h1>
+    
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="mt-6">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Submit Complaint
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+  

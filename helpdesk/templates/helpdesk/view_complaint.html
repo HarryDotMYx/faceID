@@ -1,0 +1,59 @@
+  html
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h1 class="text-2xl font-bold mb-4">{{ complaint.title }}</h1>
+        
+        <div class="mb-6">
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                <span>Submitted by: {{ complaint.user.username }}</span>
+                <span>{{ complaint.created_at|date:"M d, Y H:i" }}</span>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+                {{ complaint.description|linebreaks }}
+            </div>
+            <div class="mt-2">
+                <span class="px-2 py-1 rounded text-sm 
+                    {% if complaint.status == 'new' %}bg-blue-100 text-blue-800
+                    {% elif complaint.status == 'in_progress' %}bg-yellow-100 text-yellow-800
+                    {% elif complaint.status == 'resolved' %}bg-green-100 text-green-800
+                    {% else %}bg-gray-100 text-gray-800{% endif %}">
+                    {{ complaint.get_status_display }}
+                </span>
+            </div>
+        </div>
+
+        {% if complaint.replies.exists %}
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold mb-4">Replies</h2>
+                {% for reply in complaint.replies.all %}
+                    <div class="mb-4 {% if reply.is_staff_reply %}ml-8{% endif %}">
+                        <div class="bg-gray-50 p-4 rounded">
+                            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                <span>{{ reply.user.username }}</span>
+                                <span>{{ reply.created_at|date:"M d, Y H:i" }}</span>
+                            </div>
+                            {{ reply.message|linebreaks }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold mb-2">Add Reply</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Submit Reply
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+  

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8">Ticket Management</h1>
+    
+    <!-- Filters -->
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-6">
+        <form method="GET" class="flex space-x-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Status</label>
+                <select name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="">All Statuses</option>
+                    {% for code, label in status_choices %}
+                        <option value="{{ code }}" {% if code == current_status %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Month</label>
+                <select name="month" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="">All Months</option>
+                    {% for i in "123456789101112"|make_list %}
+                        <option value="{{ i }}" {% if i == current_month %}selected{% endif %}>
+                            {{ i|date:"F" }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Year</label>
+                <select name="year" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="">All Years</option>
+                    {% for year in "2024"|make_list %}
+                        <option value="{{ year }}" {% if year == current_year %}selected{% endif %}>
+                            {{ year }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Apply Filters
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Tickets List -->
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+        {% if tickets %}
+            <div class="space-y-4">
+                {% for ticket in tickets %}
+                    <div class="border rounded p-4 
+                        {% if ticket.status == 'new' %}bg-blue-50
+                        {% elif ticket.status == 'open' %}bg-yellow-50
+                        {% elif ticket.status == 'review' %}bg-purple-50
+                        {% elif ticket.status == 'hold' %}bg-orange-50
+                        {% elif ticket.status == 'cancelled' %}bg-red-50
+                        {% else %}bg-green-50{% endif %}">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold">{{ ticket.subject }}</h3>
+                                <p class="text-sm text-gray-600">
+                                    By: {{ ticket.user.username }} | 
+                                    Category: {{ ticket.get_category_display }}
+                                </p>
+                            </div>
+                            <span class="px-2 py-1 text-sm rounded-full 
+                                {% if ticket.status == 'new' %}bg-blue-100 text-blue-800
+                                {% elif ticket.status == 'open' %}bg-yellow-100 text-yellow-800
+                                {% elif ticket.status == 'review' %}bg-purple-100 text-purple-800
+                                {% elif ticket.status == 'hold' %}bg-orange-100 text-orange-800
+                                {% elif ticket.status == 'cancelled' %}bg-red-100 text-red-800
+                                {% else %}bg-green-100 text-green-800{% endif %}">
+                                {{ ticket.get_status_display }}
+                            </span>
+                        </div>
+                        
+                        <p class="mt-2">{{ ticket.description }}</p>
+                        
+                        {% if ticket.response %}
+                            <div class="mt-2 pl-4 border-l-4 border-blue-500">
+                                <p class="text-sm text-gray-700">
+                                    <span class="font-semibold">Response:</span> 
+                                    {{ ticket.response }}
+                                </p>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                <div>Created: {{ ticket.created_at|date:"M d, Y H:i" }}</div>
+                                <div>Days Open: {{ ticket.days_open }}</div>
+                                {% if ticket.status_changed_at %}
+                                    <div>Last Status Change: {{ ticket.status_changed_at|date:"M d, Y H:i" }}</div>
+                                {% endif %}
+                            </div>
+                            <a href="{% url 'recognition:admin:update_ticket' ticket.id %}" 
+                               class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                Update Status
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-600">No tickets found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

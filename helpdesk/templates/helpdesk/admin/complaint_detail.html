@@ -1,0 +1,100 @@
+  html
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+        <a href="{% url 'helpdesk:admin:complaint_list' %}" 
+           class="text-indigo-600 hover:text-indigo-900">
+            ← Back to Complaints
+        </a>
+    </div>
+    
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Complaint Details
+            </h3>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Complaint ID
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                        {{ complaint.id }}
+                    </dd>
+                </div>
+                <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Status
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            {% if complaint.status == 'new' %}bg-blue-100 text-blue-800
+                            {% elif complaint.status == 'in_progress' %}bg-yellow-100 text-yellow-800
+                            {% elif complaint.status == 'resolved' %}bg-green-100 text-green-800
+                            {% else %}bg-gray-100 text-gray-800{% endif %}">
+                            {{ complaint.get_status_display }}
+                        </span>
+                    </dd>
+                </div>
+                <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Title
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                        {{ complaint.title }}
+                    </dd>
+                </div>
+                <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Description
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                        {{ complaint.description|linebreaks }}
+                    </dd>
+                </div>
+            </dl>
+        </div>
+        
+        <!-- Update Form -->
+        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+            <h4 class="text-lg font-medium text-gray-900 mb-4">Update Complaint</h4>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="mt-4">
+                    <button type="submit" 
+                            class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+                        Update Complaint
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Replies -->
+        {% if complaint.replies.exists %}
+        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+            <h4 class="text-lg font-medium text-gray-900 mb-4">Replies</h4>
+            {% for reply in complaint.replies.all %}
+            <div class="mb-4 {% if reply.is_staff_reply %}ml-8{% endif %}">
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <div class="flex justify-between text-sm text-gray-500 mb-2">
+                        <span>{{ reply.user.username }}</span>
+                        <span>{{ reply.created_at|date:"M d, Y H:i" }}</span>
+                    </div>
+                    <div class="text-sm text-gray-900">
+                        {{ reply.message|linebreaks }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+  
